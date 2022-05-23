@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+    <title>Document</title>
+    <py-env>
+        - numpy
+        - matplotlib
+    </py-env>
+</head>
+<body>
+    <py-script>
+        print('hellow world')
+        hi = ['123', '456', 'bye']
+        for i in range(3):
+            print(hi[i])
+    </py-script>
+    <div id="plot"></div>
+    <py-script output="plot">
+        import matplotlib.pyplot as plt
+        import numpy as np
+        
+        x = np.random.randn(1000)
+        y = np.random.randn(1000)
+
+        fig, ax = plt.subplots()
+        ax.scatter(x, y)
+        fig
+    </py-script>
+
+    <div>
+        <input type="number" id="number_input" min="1" max="50">
+        <button id="add" pys-onClick="play_game">Guess</button>
+    </div>
+    <h1 id="result"></h1>
+    <py-script>
+        import random
+        number_input = Element("number_input")
+        result = Element("result")
+        def play_game(*args):
+            user_guess = number_input.value
+            machine_guess = random.randint(1, 10)
+            if int(user_guess) == machine_guess:
+                result.element.innerText = 'Win'
+            else:
+                result.element.innerText = f'Num is {machine_guess}'
+    </py-script>
+</body>
+</html>
